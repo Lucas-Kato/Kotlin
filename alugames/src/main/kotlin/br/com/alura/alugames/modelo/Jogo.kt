@@ -2,12 +2,12 @@ package br.com.alura.alugames.modelo
 
 import br.com.alura.alugames.utilitario.formatoComDuasCasasDecimais
 import com.google.gson.annotations.Expose
-import java.math.BigDecimal
 
 data class Jogo(@Expose val titulo:String,
                 @Expose val capa:String): Recomendacao {
     var descricao: String? = null
-    var preco = BigDecimal("0.0")
+    var preco = 0.0
+    var id = 0
 
     private val listarNotas = mutableListOf<Int>()
 
@@ -17,9 +17,10 @@ data class Jogo(@Expose val titulo:String,
     override fun recomendar(nota: Int) {
         listarNotas.add(nota)
     }
-    constructor(titulo: String, capa: String, preco:BigDecimal, descricao: String) : this(titulo, capa) {
+    constructor(titulo: String, capa: String, preco:Double, descricao: String?, id: Int = 0) : this(titulo, capa) {
         this.preco = preco
         this.descricao = descricao
+        this.id = id
     }
     override fun toString(): String {
         return "\nMeu Jogo: \n" +
@@ -27,7 +28,9 @@ data class Jogo(@Expose val titulo:String,
                 "Capa: $capa \n" +
                 "Descricao: $descricao \n" +
                 "Preco: $preco, \n" +
-                "Reputação: $media"
+                "Reputação: $media \n" +
+                "ID: $id"
+
     }
 
 

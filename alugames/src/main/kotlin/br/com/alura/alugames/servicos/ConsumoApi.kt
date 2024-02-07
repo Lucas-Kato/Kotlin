@@ -2,9 +2,9 @@ package br.com.alura.alugames.servicos
 
 import br.com.alura.alugames.modelo.*
 import br.com.alura.alugames.utilitario.criaGamer
+import br.com.alura.alugames.utilitario.criaJogo
 import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
-import criaJogo
 import java.net.URI
 import java.net.http.HttpClient
 import java.net.http.HttpRequest

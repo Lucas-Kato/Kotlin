@@ -7,6 +7,7 @@ import kotlin.random.Random
 
 data class Gamer(var nome:String, var email:String): Recomendacao {
     var dataNascimento:String? = null
+    var id = 0;
     var usuario:String? = null
         set(value) {
             field = value
@@ -18,13 +19,9 @@ data class Gamer(var nome:String, var email:String): Recomendacao {
         private set
 
     var plano: Plano = PlanoAvulso("BRONZE")
-
     val jogosBuscados = mutableListOf<Jogo?>()
-
     val jogosAlugados = mutableListOf<Aluguel>()
-
     private val listaNotas = mutableListOf<Int>()
-
     val jogosRecomendados = mutableListOf<Jogo>()
 
     override val media: Double
@@ -42,10 +39,11 @@ data class Gamer(var nome:String, var email:String): Recomendacao {
         jogosRecomendados.add(jogo)
     }
 
-    constructor(nome: String, email: String, dataNascimento:String, usuario:String):
+    constructor(nome: String, email: String, dataNascimento: String?, usuario: String?, id: Int = 0):
             this(nome, email) {
         this.dataNascimento = dataNascimento
         this.usuario = usuario
+        this.id = id
         criarIdInterno()
     }
 
@@ -57,13 +55,14 @@ data class Gamer(var nome:String, var email:String): Recomendacao {
     }
 
     override fun toString(): String {
-        return  " Gamer(" +
-                " nome='$nome'," +
-                " email='$email'," +
-                " dataNascimento=$dataNascimento," +
-                " usuario=$usuario," +
-                " idInterno=$idInterno," +
-                " Reputação=$media)"
+        return  " Gamer:\n" +
+                " nome= $nome\n," +
+                " email=$email\n," +
+                " dataNascimento=$dataNascimento\n," +
+                " usuario=$usuario\n," +
+                " idInterno=$idInterno\n," +
+                " Reputação=$media\n" +
+                " ID: $id"
     }
 
     fun criarIdInterno() {

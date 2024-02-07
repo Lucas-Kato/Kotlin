@@ -1,16 +1,18 @@
 package br.com.alura.alugames.modelo
 
+import br.com.alura.alugames.utilitario.formatoComDuasCasasDecimais
 import java.math.BigDecimal
 import java.math.RoundingMode
 
 class PlanoAvulso(
-    tipo: String): Plano(tipo) {
+    tipo: String,
+    id: Int = 0): Plano(tipo, id) {
 
-    override fun obterValor(aluguel: Aluguel): BigDecimal {
+    override fun obterValor(aluguel: Aluguel): Double {
         var valorOriginal = super.obterValor(aluguel)
         if (aluguel.gamer.media > 8) {
-            valorOriginal -= valorOriginal.multiply(BigDecimal("0.1"))
+            valorOriginal -= valorOriginal * 0.1
         }
-        return valorOriginal.setScale(2, RoundingMode.HALF_EVEN)
+        return valorOriginal.formatoComDuasCasasDecimais()
     }
 }
