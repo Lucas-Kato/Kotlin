@@ -1,20 +1,33 @@
 package br.com.alura.alugames.modelo
 
-data class Jogo(val titulo:String,
-                val capa:String) {
-    var descricao: String? = null
-    var preco = 0.0
+import br.com.alura.alugames.utilitario.formatoComDuasCasasDecimais
+import com.google.gson.annotations.Expose
+import java.math.BigDecimal
 
-    constructor(titulo: String, capa: String, preco:Double, descricao: String) : this(titulo, capa) {
+data class Jogo(@Expose val titulo:String,
+                @Expose val capa:String): Recomendacao {
+    var descricao: String? = null
+    var preco = BigDecimal("0.0")
+
+    private val listarNotas = mutableListOf<Int>()
+
+    override val media: Double
+        get() = listarNotas.average().formatoComDuasCasasDecimais()
+
+    override fun recomendar(nota: Int) {
+        listarNotas.add(nota)
+    }
+    constructor(titulo: String, capa: String, preco:BigDecimal, descricao: String) : this(titulo, capa) {
         this.preco = preco
         this.descricao = descricao
     }
     override fun toString(): String {
-        return "Meu Jogo: \n" +
+        return "\nMeu Jogo: \n" +
                 "Título: $titulo \n" +
                 "Capa: $capa \n" +
                 "Descricao: $descricao \n" +
-                "Preco: $preco"
+                "Preco: $preco, \n" +
+                "Reputação: $media"
     }
 
 
